@@ -45,8 +45,6 @@ UE.registerUI('newPostil',function(editor,uiName){
 	var btn = new UE.ui.Button({
 		name:'新建批注',
 		title:'新建批注',
-		showIcon: JSON.parse(localStorage.getItem('daily_token')).role != 0,
-		showText: JSON.parse(localStorage.getItem('daily_token')).role != 0,
 		cssRules :'background: url('+editor.options.UEDITOR_HOME_URL+'postilPlugin/newPostil.png) no-repeat 3px 2px / 74% !important',
 		onclick:function () {
 			// 判断是否选中一块区域
@@ -59,9 +57,9 @@ UE.registerUI('newPostil',function(editor,uiName){
 				alert('请选择需要添加批注的内容！');
 				return;
 			}
-			
 
-			
+
+
 		}
 	});
 

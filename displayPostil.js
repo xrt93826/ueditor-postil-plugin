@@ -8,8 +8,6 @@ UE.registerUI('showPostil',function(editor,uiName){
 	var btn = new UE.ui.Button({
 		name:'显示批注',
 		title:'显示批注',
-		showIcon: JSON.parse(localStorage.getItem('daily_token')).role != 0,
-		showText: JSON.parse(localStorage.getItem('daily_token')).role != 0,
 		cssRules :'background: url('+editor.options.UEDITOR_HOME_URL+'postilPlugin/showPostil.png) no-repeat 3px 2px / 74% !important',
 		onclick:function () {
 			var markList = me.document.getElementsByTagName('mark');
@@ -20,7 +18,7 @@ UE.registerUI('showPostil',function(editor,uiName){
 				}
 			});
 
-			
+
 		}
 	});
 
@@ -34,8 +32,6 @@ UE.registerUI('hidePostil',function(editor,uiName){
 	var btn = new UE.ui.Button({
 		name:'隐藏批注',
 		title:'隐藏批注',
-		showIcon: JSON.parse(localStorage.getItem('daily_token')).role != 0,
-		showText: JSON.parse(localStorage.getItem('daily_token')).role != 0,
 		cssRules :'background: url('+editor.options.UEDITOR_HOME_URL+'postilPlugin/hidePostil.png) no-repeat 3px 2px / 76% !important',
 		onclick:function () {
 			var markList = me.document.getElementsByTagName('mark');
@@ -46,11 +42,10 @@ UE.registerUI('hidePostil',function(editor,uiName){
 				}
 			});
 
-			
+
 		}
 	});
 
 
 	return btn;
 });
-

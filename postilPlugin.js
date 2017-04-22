@@ -30,7 +30,7 @@ UE.plugins["postil"] = function () {
 	me.commands['postil'] = {
 		// 添加批注
 		execCommand:function (cmdName, opt) {
-        
+
 			//获取当前选区
 			var range = me.selection.getRange();
 
@@ -42,7 +42,7 @@ UE.plugins["postil"] = function () {
 	        	postil.setAttribute('date',opt.date);
 	        }else{
 	        	var contents = range.cloneContents();
-	        	// 将选取用mark标签包起来，并赋予属性 
+	        	// 将选取用mark标签包起来，并赋予属性
 				var markRange = range.applyInlineStyle( tag, {
 					style:'background-color: rgb(255, 255, 0) !important;font-style: normal;',
 					plugins:'postil',
@@ -53,9 +53,9 @@ UE.plugins["postil"] = function () {
 	        }
 
 	        range.collapse().select(true);
-			
 
-				
+
+
 		},
 
 		// 返回当前选中的第一个批注节点
@@ -64,7 +64,7 @@ UE.plugins["postil"] = function () {
 				node;
 				node = range.startContainer;
 				node = node.nodeType == 1 ? node : node.parentNode;
-				if ( node && (node = domUtils.findParentByTagName( node, tag, true )) 
+				if ( node && (node = domUtils.findParentByTagName( node, tag, true ))
 					&& ! domUtils.isInNodeEndBoundary(range,node)) {
 					return node;
 				}
@@ -92,8 +92,8 @@ UE.plugins["postil"] = function () {
 		}
 	}
 
-	var popup = new baidu.editor.ui.Popup( {  
-		editor:this,  
+	var popup = new baidu.editor.ui.Popup( {
+		editor:this,
 		content: '',
 		className: 'edui-bubble',
 		_edittext: function () {
@@ -112,26 +112,20 @@ UE.plugins["postil"] = function () {
 	me.addListener( 'click', function( t, evt ) {
 		evt = evt || window.event;
 		var el = evt.target || evt.srcElement;
-		
+
 		domUtils.findParent(el,function(node){
 			if(eval('/'+tag+'/ig').test( node.tagName ) && node.getAttribute('plugins') == 'postil'){
-				var content = node.getAttribute('content'); 
-				var author = node.getAttribute('author'); 
+				var content = node.getAttribute('content');
+				var author = node.getAttribute('author');
 				var date = node.getAttribute('date');
 
 				// 判断是批改试卷还是查看批改 用以判断是否显示编辑删除按钮
 				var pathname = parent.location.pathname;
 				var pagename = pathname.slice(pathname.lastIndexOf('/')+1);
-				var html;
-				if(pagename == "correctExam.html"){
-					html = popup.formatHtml(
-						'<div style="width:200px;">'+date+'&nbsp;'+author+': <p>'+content+'</p><div style="text-align:right;"><span onclick=$$._edittext() class="edui-clickable">编辑</span>&nbsp;<span onclick=$$._delete() class="edui-clickable">删除</span></div></div>' 
+				
+				var html = popup.formatHtml(
+						'<div style="width:200px;">'+date+'&nbsp;'+author+': <p>'+content+'</p><div style="text-align:right;"><span onclick=$$._edittext() class="edui-clickable">编辑</span>&nbsp;<span onclick=$$._delete() class="edui-clickable">删除</span></div></div>'
 					);
-				}else if(pagename == "previewCorrectExam.html"){
-					html = popup.formatHtml(
-						'<div style="width:200px;">'+date+'&nbsp;'+author+': <p>'+content+'</p></div>' 
-					);
-				}
 
 				if ( html ) {
 					popup.getDom( 'content' ).innerHTML = html;

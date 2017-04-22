@@ -18,7 +18,7 @@
 		</tr>
 	</table>
 
-	
+
 	<script type="text/javascript">
 		var tag = 'mark';
 
@@ -39,12 +39,13 @@
         if(postil && postil.tagName.toLowerCase() == tag.toLowerCase() && postil.getAttribute('plugins') == 'postil'){
         	$G("text").value = postil.getAttribute('content');
         }
-		
-		
+
+
 		dialog.onok = function(){
 			editor.execCommand('postil',{
 				content:$G("text").value,
-				author:JSON.parse(localStorage.daily_token).userName,
+				// 这里的批注人可根据需求，获取登录的用户名，这里暂用admin代替
+				author:'admin',
 				date:getCurrentDate()
 			});
 
